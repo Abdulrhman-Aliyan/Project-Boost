@@ -7,6 +7,8 @@ public class Movement : MonoBehaviour
 {
     Rigidbody playerRB;
     Transform playerTrans;
+
+    AudioSource playerAudio;
     
     [SerializeField] float thrust = 1000f;
     [SerializeField] float playerRotaion = 500f;
@@ -16,6 +18,9 @@ public class Movement : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
         playerTrans = GetComponent<Transform>();
+
+        playerAudio = GetComponent<AudioSource>();
+		playerAudio.Stop();
     }
 
     // Update is called once per frame
@@ -30,7 +35,17 @@ public class Movement : MonoBehaviour
         {
             //Apply a force to this Rigidbody in direction of this GameObjects up axis
             playerRB.AddRelativeForce(Vector3.up * thrust * Time.deltaTime);
+            if(!playerAudio.isPlaying)
+            {
+                playerAudio.Play();
+            }
+            playerAudio.loop = true;
+        } 
+        else 
+        {
+            playerAudio.Stop();
         }
+
 
         if (Input.GetKey(KeyCode.A))
         {
