@@ -21,7 +21,7 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log(objCol);
                 break;
             default:
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 break; 
         }
     }
